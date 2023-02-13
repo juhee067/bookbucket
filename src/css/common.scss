@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@400;500;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap");
+* {
+  font-family: "Kaisei HarunoUmi", serif;
+  font-family: "Nanum Myeongjo", serif;
+  margin: 0;
+  padding: 0;
+  .bg {
+
+    width:100%;
+    background-image: url("../img/bg-grid.png");
+    .title {
+        color: #fff;
+        background-color: tomato;
+        font-size: 24px;
+        padding: 6px 16px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+      .msg {
+        font-weight: bold;
+       
+      }
+       h4{
+            line-height: 1.5;
+        }
+      .bucket {
+        width: 160px;
+        height: 160px;
+   
+      }    
+       .img1 {
+            background-image: url("../img/bucket-red.png");
+            background-size: cover;
+            background-position: center;
+          }
+          .img2 {
+            background-image: url("../img/bucket-lightred.png");
+            background-size: cover;
+            background-position: center;
+          }
+}
+
+}
+
+
+
+
