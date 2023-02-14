@@ -1,6 +1,6 @@
 import "./css/reset.css";
 import "./css/common.scss";
-
+import { useEffect } from "react";
 import book from "./data/Book";
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,8 +8,13 @@ import {
   faCirclePlus,
   faSquareMinus,
   faMagnifyingGlass,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+
 function App() {
+  // 도서 추가
+  const addBook = () => {};
+
   return (
     <div className="App">
       <body className="bg center">
@@ -26,6 +31,13 @@ function App() {
               icon={faSquareMinus}
               className="squareMinus cursor"
             />
+          </div>
+          <div className="Registration">
+            <input type="text" placeholder="읽을 책을 입력하세요" />
+            <button className="clearbtn">
+              {" "}
+              <FontAwesomeIcon icon={faXmark} className="faXmark cursor" />
+            </button>
           </div>
           <div className="category">
             <div className="menu">

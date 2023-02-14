@@ -3,7 +3,7 @@
 * {
   font-family: "Kaisei HarunoUmi", serif;
   font-family: "Nanum Myeongjo", serif;
-  outline: 1px solid $mainT;
+  // outline: 1px solid $mainT;
 
   .center {
     display: flex;
@@ -20,6 +20,10 @@
   // icon cursor
   .cursor {
     cursor: pointer;
+  }
+  // button
+  button {
+    border: none;
   }
   // 배경
   .bg {
@@ -61,7 +65,28 @@
     gap: 20px;
     font-size: 3em;
     color: $mainT;
-    margin-bottom: 50px;
+  }
+  // 첵 등록 input
+  .Registration {
+    position: relative;
+    margin: 50px 0;
+    input {
+      width: 300px;
+      border: 2px solid $mainT;
+      border-radius: 6px;
+      padding: 10px;
+    }
+    button {
+      position: absolute;
+      top: 3px;
+      right: 10px;
+      background-color: $subW;
+      .faXmark {
+        font-size: 1.5em;
+        color: $mainT;
+        padding: 4px 0 4px 10px;
+      }
+    }
   }
   // category
   .category {
