@@ -66,20 +66,10 @@
     font-size: 3em;
     color: $mainT;
     margin-bottom: 50px;
+
     .squareMinus.on {
       color: $subG;
-    }
-    .circlePlus {
-      display: block;
-    }
-    .circlePlus.on {
-      display: none;
-    }
-    .badgeCheck {
-      display: none;
-    }
-    .badgeCheck.on {
-      display: block;
+      pointer-events: none;
     }
   }
   // 첵 등록 input
@@ -87,26 +77,37 @@
     display: none;
     position: relative;
     margin-bottom: 50px;
+    color: $mainT;
     input {
       width: 300px;
       border: 2px solid $mainT;
       border-radius: 6px;
       padding: 10px;
     }
-    button {
+    .clearBtn {
       position: absolute;
       top: 3px;
-      right: 10px;
+      right: 38px;
+      color: $mainS;
       background-color: $subW;
+      .faEraser {
+        font-size: 1.5em;
+        padding: 4px 0 4px 10px;
+      }
+    }
+    .inputCloseBtn {
+      color: $mainT;
+      background-color: transparent;
       .faXmark {
         font-size: 1.5em;
-        color: $mainT;
-        padding: 4px 0 4px 10px;
+        margin-left: 5px;
       }
     }
   }
   .registration.on {
     display: block;
+    display: flex;
+    align-items: center;
   }
   // category
   .category {

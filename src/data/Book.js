@@ -1,5 +1,5 @@
 let book = [
-  { id: 0, title: "역행자", isOn: true },
+  { id: 0, title: "역행자" },
   // { id: 1, title: "불편한 편의점1" },
   // { id: 2, title: "트렌드 코리아 2023", isOn: true },
   // { id: 3, title: "완전한 행복" },
