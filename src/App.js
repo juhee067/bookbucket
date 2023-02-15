@@ -1,19 +1,41 @@
 import "./css/reset.css";
 import "./css/common.scss";
-import { useEffect } from "react";
+import { useState, useRef } from "react";
 import book from "./data/Book";
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlus,
+  faCircleCheck,
   faSquareMinus,
   faMagnifyingGlass,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
-  // 도서 추가
+  // state
+  // plus button
+  let [plusBtn, setPlusBtn] = useState(false);
+  // input value
+  let [inputValue, setInputValue] = useState("");
+
+  //도서 추가
   const addBook = () => {};
+  // input 하단에 띄우기
+  const showUnderInput = () => {
+    plusBtn ? setPlusBtn(false) : setPlusBtn(true);
+  };
+  const showUpInput = () => {
+    setPlusBtn(false);
+  };
+  //input value change
+  const inputText = (e) => {
+    setInputValue(e.target.value);
+  };
+  //input value null
+  const clearAllText = () => {
+    setInputValue("");
+  };
 
   return (
     <div className="App">
@@ -24,17 +46,23 @@ function App() {
           <div className="icon">
             {" "}
             <FontAwesomeIcon
-              icon={faCirclePlus}
+              icon={plusBtn ? faCircleCheck : faCirclePlus}
               className="circlePlus cursor"
+              onClick={showUnderInput}
             />
             <FontAwesomeIcon
               icon={faSquareMinus}
-              className="squareMinus cursor"
+              className={`squareMinus cursor ${plusBtn ? "on" : ""}`}
             />
           </div>
-          <div className="Registration">
-            <input type="text" placeholder="읽을 책을 입력하세요" />
-            <button className="clearbtn">
+          <div className={`registration ${plusBtn ? "on" : ""}`}>
+            <input
+              type="text"
+              placeholder="읽을 책을 입력하세요"
+              value={inputValue}
+              onChange={(e) => inputText(e)}
+            />
+            <button className="clearbtn" onClick={clearAllText}>
               {" "}
               <FontAwesomeIcon icon={faXmark} className="faXmark cursor" />
             </button>

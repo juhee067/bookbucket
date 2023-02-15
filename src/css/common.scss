@@ -65,11 +65,28 @@
     gap: 20px;
     font-size: 3em;
     color: $mainT;
+    margin-bottom: 50px;
+    .squareMinus.on {
+      color: $subG;
+    }
+    .circlePlus {
+      display: block;
+    }
+    .circlePlus.on {
+      display: none;
+    }
+    .badgeCheck {
+      display: none;
+    }
+    .badgeCheck.on {
+      display: block;
+    }
   }
   // 첵 등록 input
-  .Registration {
+  .registration {
+    display: none;
     position: relative;
-    margin: 50px 0;
+    margin-bottom: 50px;
     input {
       width: 300px;
       border: 2px solid $mainT;
@@ -87,6 +104,9 @@
         padding: 4px 0 4px 10px;
       }
     }
+  }
+  .registration.on {
+    display: block;
   }
   // category
   .category {
