@@ -14,6 +14,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
+  // 변수
+  let pattern = /([^가-힣a-z\x20])/i;
   // ---usestate
   // plus button
   let [plusBtn, setPlusBtn] = useState(false);
@@ -29,32 +31,36 @@ function App() {
   // input focus
   useEffect(() => {
     titleInputRef.current.focus();
-  }, [plusBtn]);
+  }, [plusBtn, listBook]);
 
   // --------함수 생성
   //도서 추가
   const addBook = () => {
-    if (inputValue) {
-      let copy = [...listBook];
-      copy.unshift({ id: bookId, title: inputValue });
-      setListBook(copy);
-      increaseId();
-      setInputValue("");
+    if (!inputValue) {
+      return;
     }
-    alertWrite();
-  };
-  // input 빈칸이면 alert 창 띄우기
-  const alertWrite = () => {
-    if (inputValue === "") {
-      alert("읽을 책 이름을 작성해주세요");
+    if (pattern.test(inputValue)) {
+      alert("똑바로 작성해주세요");
+      setInputValue("");
       return titleInputRef.current.focus();
+    }
+    let copy = [...listBook];
+    copy.unshift({ id: bookId, title: inputValue });
+    setListBook(copy);
+    increaseId();
+    setInputValue("");
+  };
+  // 엔터로 도서 추가
+  const addEnter = () => {
+    if (window.event.keyCode === 13) {
+      addBook();
     }
   };
   // input 하단에 띄우기
   const openInput = () => {
     setPlusBtn(true);
+    // testWord();
     addBook();
-    console.log(listBook);
   };
 
   //input value change
@@ -77,7 +83,15 @@ function App() {
   const closeInput = () => {
     setPlusBtn(false);
   };
-
+  // 자음, 모음 검사
+  // const testWord = () => {
+  //   if (pattern.test(inputValue)) {
+  //     alert("똑바로 작성해주세요");
+  //     setInputValue("");
+  //     titleInputRef.current.focus();
+  //     return;
+  //   }
+  // };
   return (
     <div className="App">
       <div className="bg center">
@@ -103,6 +117,7 @@ function App() {
               value={inputValue}
               onChange={(e) => inputText(e)}
               ref={titleInputRef}
+              onKeyPress={addEnter}
             />
             <button className="clearBtn" onClick={clearAllText}>
               {" "}
