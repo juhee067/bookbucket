@@ -36,19 +36,22 @@ function App() {
   // --------함수 생성
   //도서 추가
   const addBook = () => {
-    if (!inputValue) {
-      return;
-    }
     if (pattern.test(inputValue)) {
       alert("똑바로 작성해주세요");
       setInputValue("");
       return titleInputRef.current.focus();
     }
-    let copy = [...listBook];
-    copy.unshift({ id: bookId, title: inputValue });
-    setListBook(copy);
-    increaseId();
-    setInputValue("");
+    if (plusBtn) {
+      if (!inputValue) {
+        alert("도서를 입력해주세요");
+        return titleInputRef.current.focus();
+      }
+      let copy = [...listBook];
+      copy.unshift({ id: bookId, title: inputValue });
+      setListBook(copy);
+      increaseId();
+      setInputValue("");
+    }
   };
   // 엔터로 도서 추가
   const addEnter = () => {
@@ -84,14 +87,20 @@ function App() {
     setPlusBtn(false);
   };
   // 자음, 모음 검사
-  // const testWord = () => {
-  //   if (pattern.test(inputValue)) {
-  //     alert("똑바로 작성해주세요");
-  //     setInputValue("");
-  //     titleInputRef.current.focus();
-  //     return;
-  //   }
-  // };
+  const testWord = () => {
+    if (pattern.test(inputValue)) {
+      alert("똑바로 작성해주세요");
+      setInputValue("");
+      return titleInputRef.current.focus();
+    }
+  };
+  // 빈칸 검사
+  const blankWord = () => {
+    if (inputValue === "") {
+      alert("도서를 입력해주세요");
+      return titleInputRef.current.focus();
+    }
+  };
   return (
     <div className="App">
       <div className="bg center">
