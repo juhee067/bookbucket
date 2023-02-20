@@ -1,0 +1,43 @@
+@import "../../css/colors.scss";
+.bookSearch {
+  .bg {
+    padding: 0;
+    .container {
+      border: 3px solid $mainT;
+
+      .title {
+        font-weight: bold;
+        font-size: 1.5em;
+        margin: 20px;
+      }
+      .flex-row {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+      }
+      .wrap {
+        flex-wrap: wrap;
+        .reference {
+          padding: 40px 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 200px;
+          flex-grow: 1;
+          text-align: center;
+          word-break: keep-all;
+          img {
+            margin-bottom: 20px;
+          }
+          h2 {
+            font-size: 1em;
+            margin-bottom: 10px;
+          }
+          h6 {
+            font-size: 0.8em;
+          }
+        }
+      }
+    }
+  }
+}
