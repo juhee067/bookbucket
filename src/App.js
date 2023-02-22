@@ -40,9 +40,7 @@ function App() {
       </div>
       <Routes>
         {" "}
-        <Route path="/" element={<Main />}>
-          {" "}
-        </Route>
+        <Route path="/" element={<Main />}></Route>
         <Route path="/bookSearch" element={<BookSearch />}>
           {" "}
         </Route>

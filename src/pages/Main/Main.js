@@ -15,7 +15,9 @@ import {
   faEraser,
   faStamp,
 } from "@fortawesome/free-solid-svg-icons";
-
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+//import { faStar } from "@fortawesome/free-regular-svg-icons";
 const Main = () => {
   // 변수
   let pattern = /([^가-힣a-z\x20])/i;
@@ -32,6 +34,14 @@ const Main = () => {
   let [listBook, setListBook] = useState(book);
   //book id
   const [bookId, setBookId] = useState(listBook.length);
+  //tab
+  //let [tab, setTab] = useState(0);
+  // tabMenu
+  // const menuArr = [
+  //   { name: "전체보기" },
+  //   { name: "즐겨찾기" },
+  //   { name: "독서완료" },
+  // ];
   //------------useref
   const titleInputRef = useRef(null);
   // ---------------------useEffect
@@ -59,6 +69,7 @@ const Main = () => {
         title: inputValue,
         isOn: true,
         Whether: false,
+        bookMark: false,
       });
       setListBook(copy);
       increaseId();
@@ -142,6 +153,14 @@ const Main = () => {
       setListBook(copy);
     }
   };
+  //즐겨찾기
+  const bookMark = (mark) => {
+    let copy = [...listBook];
+    const mathId = copy.find((el) => el.id === mark);
+    mathId.bookMark = !mathId.bookMark;
+    setListBook(copy);
+    console.log(listBook[mark].bookMark);
+  };
   return (
     <div className="main">
       {" "}
@@ -191,10 +210,16 @@ const Main = () => {
             </button>
           </div>
           <div className="category">
+            {/* <div className="row flex-row wrap">
+              {menuArr.map((el, index) => {
+                <li className="menu">{el.name}</li>;
+              })}
+            </div> */}
             <div className="menu">
               <ul>
                 <li>전체보기</li>
                 <li>즐겨찾기</li>
+                <li>독서 완료</li>
               </ul>
             </div>
             <div className="search">
@@ -219,6 +244,14 @@ const Main = () => {
                     attachStamp(book.id);
                   }}
                 >
+                  <FontAwesomeIcon
+                    icon={book.bookMark ? solidStar : regularStar}
+                    className="fastar cursor"
+                    onClick={() => {
+                      bookMark(book.id);
+                    }}
+                  />
+
                   <h4>{book.title}</h4>
                 </div>
               );
