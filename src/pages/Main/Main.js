@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlus,
   faCircleCheck,
+  faSquareCheck,
   faSquareMinus,
   faMagnifyingGlass,
   faXmark,
@@ -20,6 +21,8 @@ const Main = () => {
   // ---usestate
   // plus button
   let [plusBtn, setPlusBtn] = useState(false);
+  // minus button
+  let [minusBtn, setMinusBtn] = useState(false);
   // input value
   let [inputValue, setInputValue] = useState("");
   // book data
@@ -32,6 +35,7 @@ const Main = () => {
   // input focus
   useEffect(() => {
     titleInputRef.current.focus();
+    console.log(listBook);
   }, [plusBtn, listBook]);
 
   // --------함수 생성
@@ -48,7 +52,7 @@ const Main = () => {
         return titleInputRef.current.focus();
       }
       let copy = [...listBook];
-      copy.unshift({ id: bookId, title: inputValue });
+      copy.unshift({ id: bookId, title: inputValue, isOn: true });
       setListBook(copy);
       increaseId();
       setInputValue("");
@@ -87,6 +91,37 @@ const Main = () => {
   const closeInput = () => {
     setPlusBtn(false);
   };
+  // 도서 삭제
+  // 도서 선택 상태 만들기
+  const deleteBefore = () => {
+    setMinusBtn(!minusBtn);
+    deleteBook();
+  };
+  //도서 클릭 시 isOn true에서 false만들기
+  const isOn = (book) => {
+    if (minusBtn) {
+      let copy = [...listBook];
+      const mathId = copy.find((el) => el.id === book);
+      mathId.isOn = !mathId.isOn;
+      setListBook(copy);
+    }
+  };
+  //선택한 도서 삭제하기
+  const deleteBook = () => {
+    if (minusBtn) {
+      let copy = [...listBook];
+      let saveContent = copy.filter((el) => el.isOn === true);
+      let deleteContent = copy.filter((el) => el.isOn === false);
+      //   선택한 것이 없을 때 alert창을 안띄우기
+      if (deleteContent.length === 0) {
+        return;
+      } else {
+        setListBook(saveContent);
+        alert("정말 삭제하시겠습니까?!");
+      }
+    }
+  };
+
   return (
     <div className="main">
       {" "}
@@ -99,12 +134,13 @@ const Main = () => {
             {" "}
             <FontAwesomeIcon
               icon={plusBtn ? faCircleCheck : faCirclePlus}
-              className="circlePlus cursor"
+              className={`circlePlus cursor ${minusBtn ? "on" : ""}`}
               onClick={openInput}
             />
             <FontAwesomeIcon
-              icon={faSquareMinus}
+              icon={minusBtn ? faSquareCheck : faSquareMinus}
               className={`squareMinus cursor ${plusBtn ? "on" : ""}`}
+              onClick={deleteBefore}
             />
           </div>
           <div className={`registration ${plusBtn ? "on" : ""}`}>
@@ -143,7 +179,14 @@ const Main = () => {
           <div className="row flex-row wrap">
             {listBook.map((book, i) => {
               return (
-                <div className="bucket img2 center ">
+                <div
+                  className={`bucket cursor img2 center ${
+                    minusBtn ? "on" : ""
+                  } ${book.isOn === false ? "oc" : ""}`}
+                  onClick={() => {
+                    isOn(book.id);
+                  }}
+                >
                   <h4>{book.title}</h4>
                 </div>
               );

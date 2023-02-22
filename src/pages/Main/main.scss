@@ -6,7 +6,7 @@
       padding-bottom: 180px;
       width: 100%;
       background-image: url("../../img/bg-grid.png");
-
+      padding-top: 0;
       // 2023년에 읽을 도서
       .msg {
         color: $subB;
@@ -34,7 +34,10 @@
       color: $mainT;
       margin-top: 30px;
       margin-bottom: 50px;
-
+      .circlePlus.on {
+        color: $subG;
+        pointer-events: none;
+      }
       .squareMinus.on {
         color: $subG;
         pointer-events: none;
@@ -128,6 +131,12 @@
         background-size: cover;
         background-position: center;
         color: $mainT;
+      }
+      .img2.on {
+        filter: drop-shadow(3px 3px 5px $subG);
+      }
+      .center.oc {
+        opacity: 50%;
       }
     }
     .wrap {

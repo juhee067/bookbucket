@@ -35,14 +35,6 @@ function App() {
                 }}
               />
             </button>
-            {/*    <Nav.Link
-              className="menu"
-              onClick={() => {
-                navigate("/cart");
-              }}
-            >
-              Cart
-            </Nav.Link> */}
           </h1>
         </div>
       </div>

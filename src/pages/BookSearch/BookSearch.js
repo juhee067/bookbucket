@@ -8,17 +8,44 @@ const BookSearch = () => {
   const proxyUrl = "https://cors-anywhere.herokuapp.com/";
   const apiKey =
     "5196C67D1E3BA4FBD1181C4103213BE2D73BFDFE73AC5DC257632D7DA1A15293";
+  // async await 말고 기본
+  // const params = {
+  //   key: apiKey,
+  //   output: "json",
+  //   categoryId: "100",
+  // };
+  // useEffect(() => {
+  //   axios
+  //     .get(`${proxyUrl}http://book.interpark.com/api/bestSeller.api`, {
+  //       params,
+  //     })
+  //     .then((res) => {
+  //       setList(res.data.item);
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // }, []);
   useEffect(() => {
-    axios
-      .get(
-        `${proxyUrl}http://book.interpark.com/api/bestSeller.api?key=${apiKey}&categoryId=100&output=json`
-      )
-      .then((res) => {
-        setList(res.data.item);
-      })
-      .catch((error) => console.log("error", error));
+    getInterparkBook();
   }, []);
-  console.log(list);
+  // async await
+  const getInterparkBook = async () => {
+    const params = {
+      key: apiKey,
+      output: "json",
+      categoryId: "100",
+    };
+    try {
+      const response = await axios.get(
+        `${proxyUrl}http://book.interpark.com/api/bestSeller.api`,
+        {
+          params,
+        }
+      );
+      return setList(response.data.item);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   return (
     <div className="bookSearch">
       <div className="bg center">
