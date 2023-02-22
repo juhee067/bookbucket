@@ -13,32 +13,26 @@
         font-weight: bold;
         font-size: 20px;
       }
-
-      // 책을 읽었을 때 붙이는 스탬프
-      //   .done::after {
-      //     content: "";
-      //     width: 70%;
-      //     height: 70%;
-      //     background-image: url("https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/stamp.png");
-      //     background-size: cover;
-      //     background-position: center;
-      //     position: absolute;
-      //     top: 20%;
-      // }
     }
     // 도서 추가/삭제 버튼
     .icon {
       display: flex;
+
       gap: 20px;
       font-size: 3em;
       color: $mainT;
       margin-top: 30px;
       margin-bottom: 50px;
+      align-items: center;
       .circlePlus.on {
         color: $subG;
         pointer-events: none;
       }
       .squareMinus.on {
+        color: $subG;
+        pointer-events: none;
+      }
+      .stamp.on {
         color: $subG;
         pointer-events: none;
       }
@@ -120,6 +114,16 @@
         h4 {
           line-height: 1.5;
         }
+      }
+      //책을 읽었을 때 붙이는 스탬프
+      .bucket.done::after {
+        content: "";
+        width: 200px;
+        height: 200px;
+        background-image: url("../../img/stamp.png");
+        background-size: cover;
+        background-position: center;
+        position: absolute;
       }
       .img1 {
         background-image: url("../../img/bucket-red.png");

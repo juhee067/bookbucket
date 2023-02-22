@@ -13,6 +13,7 @@ import {
   faMagnifyingGlass,
   faXmark,
   faEraser,
+  faStamp,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Main = () => {
@@ -23,6 +24,8 @@ const Main = () => {
   let [plusBtn, setPlusBtn] = useState(false);
   // minus button
   let [minusBtn, setMinusBtn] = useState(false);
+  // stamp button
+  let [stampBtn, setStampBtn] = useState(false);
   // input value
   let [inputValue, setInputValue] = useState("");
   // book data
@@ -35,7 +38,6 @@ const Main = () => {
   // input focus
   useEffect(() => {
     titleInputRef.current.focus();
-    console.log(listBook);
   }, [plusBtn, listBook]);
 
   // --------함수 생성
@@ -52,7 +54,12 @@ const Main = () => {
         return titleInputRef.current.focus();
       }
       let copy = [...listBook];
-      copy.unshift({ id: bookId, title: inputValue, isOn: true });
+      copy.unshift({
+        id: bookId,
+        title: inputValue,
+        isOn: true,
+        Whether: false,
+      });
       setListBook(copy);
       increaseId();
       setInputValue("");
@@ -97,7 +104,7 @@ const Main = () => {
     setMinusBtn(!minusBtn);
     deleteBook();
   };
-  //도서 클릭 시 isOn true에서 false만들기
+  //도서 클릭 시 isOn true에서 false 만들기
   const isOn = (book) => {
     if (minusBtn) {
       let copy = [...listBook];
@@ -121,7 +128,20 @@ const Main = () => {
       }
     }
   };
-
+  //stamp 찍기
+  // stamp 창 열기
+  const stamp = () => {
+    setStampBtn(!stampBtn);
+  };
+  //stamp 붙이기
+  const attachStamp = (stamp) => {
+    if (stampBtn) {
+      let copy = [...listBook];
+      const mathId = copy.find((el) => el.id === stamp);
+      mathId.Whether = !mathId.Whether;
+      setListBook(copy);
+    }
+  };
   return (
     <div className="main">
       {" "}
@@ -134,13 +154,22 @@ const Main = () => {
             {" "}
             <FontAwesomeIcon
               icon={plusBtn ? faCircleCheck : faCirclePlus}
-              className={`circlePlus cursor ${minusBtn ? "on" : ""}`}
+              className={`circlePlus cursor ${
+                minusBtn || stampBtn ? "on" : ""
+              } `}
               onClick={openInput}
             />
             <FontAwesomeIcon
               icon={minusBtn ? faSquareCheck : faSquareMinus}
-              className={`squareMinus cursor ${plusBtn ? "on" : ""}`}
+              className={`squareMinus cursor ${
+                plusBtn || stampBtn ? "on" : ""
+              }`}
               onClick={deleteBefore}
+            />{" "}
+            <FontAwesomeIcon
+              icon={stampBtn ? faCircleCheck : faStamp}
+              className={`stamp cursor ${plusBtn || minusBtn ? "on" : ""}`}
+              onClick={stamp}
             />
           </div>
           <div className={`registration ${plusBtn ? "on" : ""}`}>
@@ -182,9 +211,12 @@ const Main = () => {
                 <div
                   className={`bucket cursor img2 center ${
                     minusBtn ? "on" : ""
-                  } ${book.isOn === false ? "oc" : ""}`}
+                  } ${book.isOn === false ? "oc" : ""} ${
+                    book.Whether ? "done" : ""
+                  }`}
                   onClick={() => {
                     isOn(book.id);
+                    attachStamp(book.id);
                   }}
                 >
                   <h4>{book.title}</h4>
