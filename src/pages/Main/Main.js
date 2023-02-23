@@ -2,7 +2,9 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import book from "../../data/Book";
 import "./main.scss";
-
+import Entire from "../../component/Entire";
+import Finish from "../../component/Finish";
+import Bookmark from "../../component/Bookmark";
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,8 +17,7 @@ import {
   faEraser,
   faStamp,
 } from "@fortawesome/free-solid-svg-icons";
-import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+
 //import { faStar } from "@fortawesome/free-regular-svg-icons";
 const Main = () => {
   // 변수
@@ -35,13 +36,8 @@ const Main = () => {
   //book id
   const [bookId, setBookId] = useState(listBook.length);
   //tab
-  //let [tab, setTab] = useState(0);
-  // tabMenu
-  // const menuArr = [
-  //   { name: "전체보기" },
-  //   { name: "즐겨찾기" },
-  //   { name: "독서완료" },
-  // ];
+  let [tab, setTab] = useState(0);
+
   //------------useref
   const titleInputRef = useRef(null);
   // ---------------------useEffect
@@ -116,7 +112,7 @@ const Main = () => {
     deleteBook();
   };
   //도서 클릭 시 isOn true에서 false 만들기
-  const isOn = (book) => {
+  const toggleIsOn = (book) => {
     if (minusBtn) {
       let copy = [...listBook];
       const mathId = copy.find((el) => el.id === book);
@@ -161,6 +157,50 @@ const Main = () => {
     setListBook(copy);
     console.log(listBook[mark].bookMark);
   };
+  //tab 선택
+  const selectTab = (index) => {
+    setTab(index);
+  };
+  // tabMenu
+  const menuArr = [
+    {
+      name: "전체보기",
+      content: (
+        <Entire
+          listBook={listBook}
+          minusBtn={minusBtn}
+          toggleIsOn={toggleIsOn}
+          attachStamp={attachStamp}
+          bookMark={bookMark}
+        />
+      ),
+    },
+    {
+      name: "즐겨찾기",
+      content: (
+        <Bookmark
+          listBook={listBook}
+          minusBtn={minusBtn}
+          toggleIsOn={toggleIsOn}
+          attachStamp={attachStamp}
+          bookMark={bookMark}
+        />
+      ),
+    },
+    {
+      name: "독서완료",
+      content: (
+        <Finish
+          listBook={listBook}
+          minusBtn={minusBtn}
+          toggleIsOn={toggleIsOn}
+          attachStamp={attachStamp}
+          bookMark={bookMark}
+        />
+      ),
+    },
+  ];
+
   return (
     <div className="main">
       {" "}
@@ -210,18 +250,16 @@ const Main = () => {
             </button>
           </div>
           <div className="category">
-            {/* <div className="row flex-row wrap">
-              {menuArr.map((el, index) => {
-                <li className="menu">{el.name}</li>;
-              })}
-            </div> */}
             <div className="menu">
-              <ul>
-                <li>전체보기</li>
-                <li>즐겨찾기</li>
-                <li>독서 완료</li>
-              </ul>
+              {menuArr.map((el, index) => {
+                return (
+                  <li className="menu" onClick={() => selectTab(index)}>
+                    {el.name}
+                  </li>
+                );
+              })}
             </div>
+
             <div className="search">
               {" "}
               <FontAwesomeIcon
@@ -231,31 +269,7 @@ const Main = () => {
             </div>
           </div>
           <div className="row flex-row wrap">
-            {listBook.map((book, i) => {
-              return (
-                <div
-                  className={`bucket cursor img2 center ${
-                    minusBtn ? "on" : ""
-                  } ${book.isOn === false ? "oc" : ""} ${
-                    book.Whether ? "done" : ""
-                  }`}
-                  onClick={() => {
-                    isOn(book.id);
-                    attachStamp(book.id);
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={book.bookMark ? solidStar : regularStar}
-                    className="fastar cursor"
-                    onClick={() => {
-                      bookMark(book.id);
-                    }}
-                  />
-
-                  <h4>{book.title}</h4>
-                </div>
-              );
-            })}
+            <div>{menuArr[tab].content}</div>
           </div>
         </div>
       </div>

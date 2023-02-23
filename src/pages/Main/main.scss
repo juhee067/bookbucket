@@ -83,80 +83,16 @@
       margin-bottom: 50px;
       color: $mainT;
       .menu {
-        ul {
-          display: flex;
-          gap: 20px;
-          font-size: 1.2em;
-          li {
-            cursor: pointer;
-          }
+        display: flex;
+        gap: 20px;
+        font-size: 1.2em;
+        li {
+          cursor: pointer;
         }
       }
       .search {
         font-size: 2em;
       }
-    }
-    // 책 모든 콘텐츠
-    .flex-row {
-      width: 80%;
-      display: flex;
-      justify-content: center;
-      .bucket {
-        position: relative;
-        width: 160px;
-        height: 160px;
-        margin: 8px;
-        /* 내용 글씨관련 */
-        font-weight: bold;
-        font-size: 16px;
-        text-align: center;
-        word-break: keep-all;
-        z-index: 0;
-        // 즐겨찾기 아이콘
-        .fastar {
-          position: absolute;
-          font-size: 2em;
-          top: 0;
-          left: 0;
-          transform: translate(-50%, 0);
-          color: $mainT;
-          z-index: 2;
-        }
-        // 책 제목
-        h4 {
-          line-height: 1.5;
-        }
-      }
-      //책을 읽었을 때 붙이는 스탬프
-      .bucket.done::after {
-        content: "";
-        width: 200px;
-        height: 200px;
-        background-image: url("../../img/stamp.png");
-        background-size: cover;
-        background-position: center;
-        position: absolute;
-      }
-      .img1 {
-        background-image: url("../../img/bucket-red.png");
-        background-size: cover;
-        background-position: center;
-      }
-      .img2 {
-        background-image: url("../../img/bucket-lightred.png");
-        background-size: cover;
-        background-position: center;
-        color: $mainT;
-      }
-      .img2.on {
-        filter: drop-shadow(3px 3px 5px $subG);
-      }
-      .center.oc {
-        opacity: 50%;
-      }
-    }
-    .wrap {
-      flex-wrap: wrap;
     }
   }
 }
