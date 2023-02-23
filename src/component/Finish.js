@@ -7,36 +7,40 @@ const Finish = (props) => {
   let copyListBook = [...props.listBook].filter((el) => {
     return el.Whether === true;
   });
-
+  let copySearchListBook = [...copyListBook].filter((item) => {
+    return item.title.includes(props.searchText.toLowerCase());
+  });
   return (
     <div className="finish">
       {" "}
       <div className="row flex-row wrap">
-        {copyListBook.map((book, i) => {
-          return (
-            <div
-              className={`bucket cursor img2 center ${
-                props.minusBtn ? "on" : ""
-              } ${book.isOn === false ? "oc" : ""} ${
-                book.Whether ? "done" : ""
-              }`}
-              onClick={() => {
-                props.toggleIsOn(book.id);
-                props.attachStamp(book.id);
-              }}
-            >
-              <FontAwesomeIcon
-                icon={book.bookMark ? solidStar : regularStar}
-                className="fastar cursor"
+        {(props.searchText ? copySearchListBook : copyListBook).map(
+          (book, i) => {
+            return (
+              <div
+                className={`bucket cursor img2 center ${
+                  props.minusBtn ? "on" : ""
+                } ${book.isOn === false ? "oc" : ""} ${
+                  book.Whether ? "done" : ""
+                }`}
                 onClick={() => {
-                  props.bookMark(book.id);
+                  props.toggleIsOn(book.id);
+                  props.attachStamp(book.id);
                 }}
-              />
+              >
+                <FontAwesomeIcon
+                  icon={book.bookMark ? solidStar : regularStar}
+                  className="fastar cursor"
+                  onClick={() => {
+                    props.bookMark(book.id);
+                  }}
+                />
 
-              <h4>{book.title}</h4>
-            </div>
-          );
-        })}
+                <h4>{book.title}</h4>
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );

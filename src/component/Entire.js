@@ -8,7 +8,7 @@ const Entire = (props) => {
     <div className="entire">
       {" "}
       <div className="row flex-row wrap">
-        {props.listBook.map((book, i) => {
+        {(props.searchText ? props.searched : props.listBook).map((book, i) => {
           return (
             <div
               className={`bucket cursor img2 center ${

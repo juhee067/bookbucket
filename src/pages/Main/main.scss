@@ -96,8 +96,25 @@
         }
       }
       .search {
-        font-size: 2em;
+        display: flex;
+        align-items: center;
         color: $mainT;
+        .faMagnifyingGlass {
+          font-size: 2em;
+          margin-left: 20px;
+        }
+        .searchInput {
+          display: none;
+          width: 300px;
+          font-size: 1.2em;
+          border: transparent;
+          border-bottom: 2px solid $mainT;
+          padding: 10px;
+          background-color: transparent;
+        }
+        .searchInput.on {
+          display: block;
+        }
       }
     }
   }

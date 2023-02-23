@@ -37,7 +37,15 @@ const Main = () => {
   const [bookId, setBookId] = useState(listBook.length);
   //tab
   let [tab, setTab] = useState(0);
-
+  //search
+  let [search, setSearch] = useState(false);
+  // input search
+  let [searchText, setSearchText] = useState("");
+  //search filter
+  const searched = listBook.filter((item) => {
+    return item.title.includes(searchText.toLowerCase());
+  });
+  console.log(searched);
   //------------useref
   const titleInputRef = useRef(null);
   // ---------------------useEffect
@@ -155,7 +163,6 @@ const Main = () => {
     const mathId = copy.find((el) => el.id === mark);
     mathId.bookMark = !mathId.bookMark;
     setListBook(copy);
-    console.log(listBook[mark].bookMark);
   };
   //tab 선택
   const selectTab = (index) => {
@@ -172,6 +179,8 @@ const Main = () => {
           toggleIsOn={toggleIsOn}
           attachStamp={attachStamp}
           bookMark={bookMark}
+          searchText={searchText}
+          searched={searched}
         />
       ),
     },
@@ -184,6 +193,8 @@ const Main = () => {
           toggleIsOn={toggleIsOn}
           attachStamp={attachStamp}
           bookMark={bookMark}
+          searchText={searchText}
+          searched={searched}
         />
       ),
     },
@@ -196,10 +207,20 @@ const Main = () => {
           toggleIsOn={toggleIsOn}
           attachStamp={attachStamp}
           bookMark={bookMark}
+          searchText={searchText}
+          searched={searched}
         />
       ),
     },
   ];
+  //bookSearch
+  const searchBook = () => {
+    setSearch(!search);
+  };
+  //search text
+  const getValue = (e) => {
+    setSearchText(e.target.value.toLowerCase());
+  };
 
   return (
     <div className="main">
@@ -265,9 +286,19 @@ const Main = () => {
 
             <div className="search">
               {" "}
+              <input
+                type="text"
+                placeholder="책을 검색하세요"
+                value={searchText}
+                onChange={(e) => getValue(e)}
+                ref={titleInputRef}
+                onKeyPress={addEnter}
+                className={`searchInput ${search == true ? "on" : ""}`}
+              />
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
                 className="faMagnifyingGlass cursor"
+                onClick={searchBook}
               />
             </div>
           </div>
