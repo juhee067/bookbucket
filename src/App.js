@@ -40,11 +40,13 @@ function App() {
       </div>
       <Routes>
         {" "}
-        <Route path="/" element={<Main />}></Route>
+        <Route path="/bookbucket" element={<Main />}></Route>
         <Route path="/bookSearch" element={<BookSearch />}>
           {" "}
         </Route>
-        <Route path="*" element={<div>없는 페이지에요</div>} />
+        {/* <Route path="*" element={<div>없는 페이지에요</div>}>
+          {" "}
+        </Route> */}
       </Routes>{" "}
     </div>
   );

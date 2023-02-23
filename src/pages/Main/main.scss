@@ -2,6 +2,17 @@
 * {
   // 배경
   .main {
+    .clearBtn {
+      position: absolute;
+      top: 3px;
+      right: 38px;
+      color: $mainS;
+      background-color: transparent;
+      .faEraser {
+        font-size: 1.5em;
+        padding: 4px 0 4px 10px;
+      }
+    }
     .bg {
       padding-bottom: 180px;
       width: 100%;
@@ -89,6 +100,7 @@
         color: $mainS;
         li {
           cursor: pointer;
+          padding: 10px 0;
         }
         .focused {
           color: $mainT;
@@ -96,24 +108,33 @@
         }
       }
       .search {
+        position: relative;
         display: flex;
         align-items: center;
         color: $mainT;
+        .in {
+          display: none;
+          .clearBtn {
+            right: 58px;
+          }
+
+          .searchInput {
+            width: 300px;
+            font-size: 1.2em;
+
+            border: transparent;
+            border-bottom: 2px solid $mainT;
+            padding: 10px;
+            background-color: transparent;
+          }
+        }
+        .in.on {
+          display: block;
+        }
+
         .faMagnifyingGlass {
           font-size: 2em;
           margin-left: 20px;
-        }
-        .searchInput {
-          display: none;
-          width: 300px;
-          font-size: 1.2em;
-          border: transparent;
-          border-bottom: 2px solid $mainT;
-          padding: 10px;
-          background-color: transparent;
-        }
-        .searchInput.on {
-          display: block;
         }
       }
     }

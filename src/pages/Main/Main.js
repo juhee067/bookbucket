@@ -21,7 +21,7 @@ import {
 //import { faStar } from "@fortawesome/free-regular-svg-icons";
 const Main = () => {
   // 변수
-  let pattern = /([^가-힣a-z\x20])/i;
+  let pattern = /([^0-9a-zA-Z가-힣\x20])/i;
   // ---usestate
   // plus button
   let [plusBtn, setPlusBtn] = useState(false);
@@ -58,7 +58,7 @@ const Main = () => {
   //도서 추가
   const addBook = () => {
     if (pattern.test(inputValue)) {
-      alert("똑바로 작성해주세요");
+      alert("자음, 모음만 있는 한글은 처리하지 않습니다");
       setInputValue("");
       return titleInputRef.current.focus();
     }
@@ -100,6 +100,10 @@ const Main = () => {
   //input value null
   const clearAllText = () => {
     setInputValue("");
+  };
+  //input search value null
+  const clearSearchText = () => {
+    setSearchText("");
   };
   // listBook.id lncrease
   const increaseId = () => {
@@ -286,15 +290,24 @@ const Main = () => {
 
             <div className="search">
               {" "}
-              <input
-                type="text"
-                placeholder="책을 검색하세요"
-                value={searchText}
-                onChange={(e) => getValue(e)}
-                ref={titleInputRef}
-                onKeyPress={addEnter}
-                className={`searchInput ${search == true ? "on" : ""}`}
-              />
+              <div className={`in ${search == true ? "on" : ""}`}>
+                <input
+                  type="text"
+                  placeholder="책을 검색하세요"
+                  value={searchText}
+                  onChange={(e) => getValue(e)}
+                  ref={titleInputRef}
+                  onKeyPress={addEnter}
+                  className="searchInput"
+                />
+                <button className="clearBtn" onClick={clearSearchText}>
+                  {" "}
+                  <FontAwesomeIcon
+                    icon={faEraser}
+                    className="faEraser cursor"
+                  />
+                </button>
+              </div>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
                 className="faMagnifyingGlass cursor"
