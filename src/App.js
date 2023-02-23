@@ -21,7 +21,7 @@ function App() {
             <span
               className="cursor"
               onClick={() => {
-                navigate("/");
+                navigate("/bookbucket");
               }}
             >
               2023 독서 계획

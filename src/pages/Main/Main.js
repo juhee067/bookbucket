@@ -48,11 +48,15 @@ const Main = () => {
   console.log(searched);
   //------------useref
   const titleInputRef = useRef(null);
+  const searchInputRef = useRef(null);
   // ---------------------useEffect
   // input focus
   useEffect(() => {
     titleInputRef.current.focus();
-  }, [plusBtn, listBook]);
+  }, [plusBtn, inputValue]);
+  useEffect(() => {
+    searchInputRef.current.focus();
+  }, [search, searchText]);
 
   // --------함수 생성
   //도서 추가
@@ -225,6 +229,7 @@ const Main = () => {
   const getValue = (e) => {
     setSearchText(e.target.value.toLowerCase());
   };
+  //input border css
 
   return (
     <div className="main">
@@ -290,13 +295,13 @@ const Main = () => {
 
             <div className="search">
               {" "}
-              <div className={`in ${search == true ? "on" : ""}`}>
+              <div className={`in ${search ? "on" : ""}`}>
                 <input
                   type="text"
                   placeholder="책을 검색하세요"
                   value={searchText}
                   onChange={(e) => getValue(e)}
-                  ref={titleInputRef}
+                  ref={searchInputRef}
                   onKeyPress={addEnter}
                   className="searchInput"
                 />
