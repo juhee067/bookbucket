@@ -167,10 +167,12 @@ const Main = () => {
   };
   //즐겨찾기
   const bookMark = (mark) => {
-    let copy = [...listBook];
-    const mathId = copy.find((el) => el.id === mark);
-    mathId.bookMark = !mathId.bookMark;
-    setListBook(copy);
+    if (stampBtn === false) {
+      let copy = [...listBook];
+      const mathId = copy.find((el) => el.id === mark);
+      mathId.bookMark = !mathId.bookMark;
+      setListBook(copy);
+    }
   };
   //tab 선택
   const selectTab = (index) => {
@@ -295,7 +297,16 @@ const Main = () => {
 
             <div className="search">
               {" "}
-              <div className={`in ${search ? "on" : ""}`}>
+              <div
+                className={`in ${
+                  plusBtn === false &&
+                  minusBtn === false &&
+                  stampBtn === false &&
+                  search
+                    ? "on"
+                    : ""
+                }`}
+              >
                 <input
                   type="text"
                   placeholder="책을 검색하세요"
