@@ -253,7 +253,10 @@ const Main = () => {
             <div className="menu">
               {menuArr.map((el, index) => {
                 return (
-                  <li className="menu" onClick={() => selectTab(index)}>
+                  <li
+                    className={index === tab ? "focused" : ""}
+                    onClick={() => selectTab(index)}
+                  >
                     {el.name}
                   </li>
                 );

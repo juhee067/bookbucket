@@ -81,17 +81,23 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 50px;
-      color: $mainT;
+
       .menu {
         display: flex;
         gap: 20px;
         font-size: 1.2em;
+        color: $mainS;
         li {
           cursor: pointer;
+        }
+        .focused {
+          color: $mainT;
+          border-bottom: 2px solid $mainT;
         }
       }
       .search {
         font-size: 2em;
+        color: $mainT;
       }
     }
   }
